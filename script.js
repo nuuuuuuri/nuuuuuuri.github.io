@@ -70,6 +70,16 @@ document.addEventListener('DOMContentLoaded', () => {
           
         });
     });
+	
+	// 체크박스를 클릭할 때마다 상태를 저장
+	document.querySelectorAll('#checklist input[type="checkbox"]').forEach(checkbox => {
+		checkbox.addEventListener('change', saveChecklistState);
+	});
+
+	// 페이지 로드 시 체크박스 상태 복원
+	loadChecklistState();
+	
+
 
 	
 });
@@ -90,3 +100,91 @@ window.addEventListener('scroll', () => {
         scrollToTopButton.classList.remove('show');
     }
 });
+const VND_TO_KRW_RATE = 5.50 / 100; // 100 VND = 5.50 KRW, 1 VND = 0.055 KRW
+const KRW_TO_VND_RATE = 100 / 5.50; // 5.50 KRW = 100 VND, 1 KRW = 18.18 VND
+
+function convertToVND() {
+    const krwAmount = parseFloat(document.getElementById('krw').value.replace(/,/g, '')); // 쉼표 제거 후 숫자 변환
+    const vndAmount = krwAmount * KRW_TO_VND_RATE;
+
+    // VND 입력값과 출력값을 천 단위 구분
+    document.getElementById('vnd').value = vndAmount.toFixed(0).toLocaleString(); // 베트남 동화 값에 쉼표 추가
+    document.getElementById('vnd-output').textContent = `${comma(krwAmount)} 원 = ${comma(vndAmount.toFixed(0).toLocaleString())} VND`;
+}
+
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+
+function convertToKRW() {
+    const vndAmount = parseFloat(document.getElementById('vnd').value.replace(/,/g, '')); // 쉼표 제거 후 숫자 변환
+    const krwAmount = vndAmount * VND_TO_KRW_RATE;
+
+    // KRW 입력값과 출력값을 천 단위 구분
+    document.getElementById('krw').value = krwAmount.toFixed(0).toLocaleString(); // 원화 값에 쉼표 추가
+    document.getElementById('krw-output').textContent = `${comma(vndAmount)} VND = ${comma(krwAmount.toFixed(0).toLocaleString())} 원`;
+}
+
+
+
+const USD_TO_KRW_RATE = 1300; // 1 USD = 1300 KRW (예시 환율, 실제 환율에 따라 다를 수 있음)
+const KRW_TO_USD_RATE = 1 / USD_TO_KRW_RATE; // 1 KRW = 1 / 1300 USD
+
+// USD -> KRW 변환 함수
+function convertDollarToKRW() {
+	const usdAmount = parseFloat(document.getElementById('usd').value.replace(/,/g, '')); // 쉼표 제거 후 숫자 변환
+	if (isNaN(usdAmount)) return; // 유효한 숫자가 아닌 경우 변환 안함
+
+	const krwAmount = usdAmount * USD_TO_KRW_RATE;
+	document.getElementById('krw').value = comma(krwAmount); // KRW에 천 단위 구분 적용
+	document.getElementById('krw-output').textContent = `${comma(usdAmount)} USD = ${comma(krwAmount.toFixed(0).toLocaleString())} KRW`;
+}
+
+// KRW -> USD 변환 함수
+function convertKRWToDollar() {
+	const krwAmount = parseFloat(document.getElementById('krw').value.replace(/,/g, '')); // 쉼표 제거 후 숫자 변환
+	if (isNaN(krwAmount)) return; // 유효한 숫자가 아닌 경우 변환 안함
+
+	const usdAmount = krwAmount * KRW_TO_USD_RATE;
+	document.getElementById('usd').value = comma(usdAmount); // USD에 천 단위 구분 적용
+	document.getElementById('usd-output').textContent = `${comma(krwAmount)} KRW = ${comma(usdAmount.toFixed(0).toLocaleString()) } USD`;
+}
+
+
+// 체크박스를 클릭할 때마다 쿠키에 상태 저장
+function saveChecklistState() {
+    const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+    const checklistState = {};
+
+    checkboxes.forEach((checkbox, index) => {
+        checklistState[`item${index}`] = checkbox.checked; // 체크된 상태 저장
+    });
+
+    // 상태를 JSON 문자열로 변환하여 쿠키에 저장 (1일 동안 유지)
+    document.cookie = `checklistState=${JSON.stringify(checklistState)}; path=/; max-age=${60 * 60 * 24}`;
+}
+
+// 페이지 로드 시 쿠키에서 체크박스 상태 복원
+function loadChecklistState() {
+    const cookies = document.cookie.split(';');
+    let checklistState = {};
+
+    cookies.forEach(cookie => {
+        const [key, value] = cookie.trim().split('=');
+        if (key === 'checklistState') {
+            checklistState = JSON.parse(decodeURIComponent(value)); // 쿠키에서 JSON 상태 읽기
+        }
+    });
+
+    // 체크박스를 해당 상태로 설정
+    const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+    checkboxes.forEach((checkbox, index) => {
+        if (checklistState[`item${index}`]) {
+            checkbox.checked = true; // 체크박스를 체크 상태로 설정
+        } else {
+            checkbox.checked = false; // 체크박스를 체크 해제 상태로 설정
+        }
+    });
+}
+

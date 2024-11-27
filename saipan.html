@@ -231,7 +231,23 @@
         <section id="currency" class="section">
 			<h2>돈계산하기</h2>
 			<p>환율 계산기와 현지 화폐 정보를 확인하세요.</p>
-			<button  class="go-back-btn">뒤로</button>
+						
+			<!-- 달러 입력 -->
+			<div class="currency-input">
+				<label for="usd">미국 달러 (USD)</label>
+				<input type="number" id="usd" placeholder="달러 입력" oninput="convertDollarToKRW()">
+			</div>
+			
+			<!-- 한국 원화 입력 -->
+			<div class="currency-input">
+				<label for="krw">한국 원화 (KRW)</label>
+				<input type="number" id="krw" placeholder="한국 원화 입력" oninput="convertKRWToDollar()">
+			</div>
+			
+			
+			<!-- 출력 영역 -->
+			<p id="krw-output"></p>
+			<p id="usd-output"></p>
 		</section>
 		<section id="etc" class="section">
 			<h2>기타</h2>
