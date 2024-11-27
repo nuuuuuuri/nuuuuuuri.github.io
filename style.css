@@ -19,6 +19,7 @@ body {
 
 /* 헤더 스타일 */
 header {
+	position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -75,10 +76,13 @@ nav a:hover {
         width: 200px;
         border-radius: 0 0 10px 10px;
         box-shadow: 0px 4px 10px var(--shadow-color);
+        opacity: 0; /* 기본적으로 숨김 */
+        transition: opacity 0.3s ease-in-out; /* 애니메이션 효과 */
     }
 
     nav.active {
         display: flex;
+        opacity: 1; /* 메뉴가 활성화되면 표시 */
     }
 
     header .menu-icon {
@@ -173,13 +177,14 @@ main {
 
 /* 푸터 */
 footer {
-    background-color: var(--primary-color); /* 바다색 */
+    background-color: #B0E0E6  ; /* 연한 하늘색 */
     color: white;
     text-align: center;
     padding: 15px 0;
     margin-top: 20px;
     font-size: 0.9em;
 }
+
 
 footer a {
     color: var(--highlight-color); /* 포인트 색상 */
@@ -222,4 +227,338 @@ footer a:hover {
     background-color: var(--highlight-color); /* 산호색 */
     transform: translateY(-5px); /* 버튼이 약간 올라감 */
     box-shadow: 0px 5px 15px var(--shadow-color);
+}
+
+
+/* 공통 네비게이션 바 스타일 */
+#navigation-bar {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    background-color: var(--primary-color);
+    padding: 10px 0;
+    box-shadow: 0px 2px 8px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+#navigation-bar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#navigation-bar a:hover {
+    background-color: var(--highlight-color);
+}
+
+/* 모바일에서 기본적으로 숨기기 */
+@media (max-width: 768px) {
+    #navigation-bar {
+        display: none; /* 기본적으로 숨김 */
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+        position: absolute;
+        top: 60px; /* 햄버거 메뉴 아래에 표시 */
+        right: 10px;
+        background-color: var(--primary-color);
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px var(--shadow-color);
+    }
+
+    #navigation-bar.active {
+        display: flex; /* 햄버거 메뉴 클릭 시 표시 */
+    }
+
+    .menu-icon {
+        display: block; /* 모바일에서만 보이도록 설정 */
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        z-index: 1100; /* 네비게이션 바보다 위에 표시 */
+    }
+}
+
+
+/* 메인 섹션 스타일 */
+main section {
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+main section h2 {
+    color: var(--primary-color); /* 바다색 */
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+main section p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* 홈으로 돌아가기 버튼 스타일 */
+.home-button {
+    background-color: var(--secondary-color); /* 밝은 노란색 */
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    position: absolute; /* 위치를 절대값으로 지정 */
+    top: 50%; /* 화면 중앙에 배치 */
+    left: 50%; /* 화면 중앙에 배치 */
+    transform: translate(-50%, -50%); /* 중앙 정렬을 위해 이동 */
+    z-index: 1100; /* 버튼을 헤더 아이템들 위에 표시 */
+}
+
+.home-button:hover {
+    background-color: var(--highlight-color); /* 포인트 색상 */
+    transform: translate(-50%, -50%) translateY(-5px); /* 버튼이 약간 올라감 */
+}
+
+/* 모바일 화면에서도 버튼을 잘 보이게 하기 위한 스타일 */
+@media (max-width: 768px) {
+    .home-button {
+        font-size: 14px;
+        z-index: 1100; /* 메뉴 아이콘보다 위에 표시 */
+    }
+}
+
+/* 헤더 스타일 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color); /* 바다색 */
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 8px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* 헤더가 다른 요소들 위에 표시되도록 설정 */
+    position: relative; /* 타이틀이 잘 보이도록 */
+}
+
+
+
+/* 맨 위로 올리기 버튼 스타일 */
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 20px; /* 화면 하단에서 20px 떨어짐 */
+    right: 20px; /* 화면 오른쪽에서 20px 떨어짐 */
+    background-color: var(--primary-color); /* 바다색 */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 2em;
+    text-align: center;
+    line-height: 45px;
+    cursor: pointer;
+    box-shadow: 0px 5px 10px var(--shadow-color);
+    transition: opacity 0.3s;
+    opacity: 0; /* 기본적으로 숨김 */
+    z-index: 1000; /* 다른 요소들보다 위에 표시 */
+}
+
+/* 버튼을 클릭하면 배경색이 살짝 변화 */
+.scroll-to-top-btn:hover {
+    background-color: var(--highlight-color); /* 포인트 색상 */
+}
+
+/* 버튼이 보일 때의 스타일 */
+.scroll-to-top-btn.show {
+    opacity: 1;
+}
+
+/* 기본적으로 모든 섹션을 숨기고 active 클래스가 있는 섹션만 보이게 설정 */
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+
+/* 메인 화면을 꾸미기 위한 스타일 */
+#main-intro {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f0f8ff;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+#main-intro h2 {
+    font-size: 2em;
+    color: #0073e6;
+}
+
+#main-intro p {
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* 네비게이션 바 버튼 스타일 */
+.intro-buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.intro-btn {
+    padding: 15px 30px;
+    background-color: #0073e6;
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 200px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.intro-btn:hover {
+    background-color: #005bb5;
+}
+
+/* 네비게이션 바 아래 버튼 스타일 */
+.explore-btn-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#explore-button {
+    padding: 15px 30px;
+    background-color: #0073e6;
+    color: white;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#explore-button:hover {
+    background-color: #005bb5;
+}
+
+/* 뒤로 가기 버튼 스타일 */
+.go-back-btn {
+    position: absolute;
+    top: 60px; /* 헤더 높이에 맞춰 위치 조정 (헤더 높이에 따라 값 변경 가능) */
+    right: 20px; /* 화면의 오른쪽으로 배치 */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1001; /* 햄버거 메뉴보다 위에 오도록 설정 */
+}
+
+.go-back-btn:hover {
+    background-color: #0056b3;
+}
+
+/* .action 클래스가 적용되었을 때의 스타일 */
+.section.action {
+    background-color: #f0f0f0;  /* 배경색을 변경 */
+    transition: background-color 0.3s ease;  /* 배경색 전환 애니메이션 */
+}
+
+/* 예시로 애니메이션 추가 */
+.section.action {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/*****************************************************************************/
+
+/* section-content를 화면 중앙에 고정 */
+.section-content {
+    position: absolute;
+    
+    left: 50%;
+    transform: translate(-50%, -50%); /* 화면에서 정확히 중앙으로 위치 */
+    text-align: center;
+}
+/* 모바일에서 조정 */
+@media (max-width: 768px) {
+    .section-content {
+        width: 90%; /* 모바일 화면에서 더 넓은 공간을 차지하게 설정 */
+        font-size: 14px; /* 작은 화면에서 글씨 크기 줄이기 */
+    }
+}
+
+
+/* 테이블을 감싸는 div */
+.table-container {
+    width: 100%;
+    overflow-x: auto;  /* 가로 스크롤을 추가하여 길게 보여줌 */
+    margin-top: 20px;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    max-width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-top: 50px;
+    overflow-x: auto;
+    display: block;
+}
+
+/* 테이블 셀 스타일 */
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 0px;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* 테이블 제목 (헤더) 스타일 */
+th {
+    background-color: #f4f4f4;
+}
+
+/* 모바일 화면에서 테이블의 크기 조정 */
+@media (max-width: 768px) {
+    table {
+        width: 100%;
+        min-width: 900px;  /* 모바일에서도 최소 너비를 900px로 설정 */
+    }
+
+    table th, table td {
+        font-size: 18px;  /* 모바일에서 글씨 크기 줄이기 */
+        padding: 10px 5px; /* 패딩 조정 */
+    }
 }
