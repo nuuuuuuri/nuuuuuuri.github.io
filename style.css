@@ -676,7 +676,6 @@ th {
 /* checklist 섹션만 적용되는 스타일 */
 #checklist {
     padding: 20px;
-    width: 100%;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -752,26 +751,20 @@ th {
     outline: none;
 }
 
-/* 모바일 스타일링 */
 @media (max-width: 768px) {
     #checklist {
-        padding: 15px;
+        padding: 10px;
     }
 
-    #checklist h2 {
-        font-size: 24px;
+    #checklist h2, #checklist h3 {
+        font-size: 18px; /* 제목 크기 줄이기 */
     }
 
-    #checklist h3 {
-        font-size: 18px;
+    #checklist ul {
+        padding-left: 10px; /* 모바일에서 padding 조정 */
     }
-
-    #checklist ul li {
-        font-size: 16px;
-    }
-
-    #checklist .go-back-btn {
-        font-size: 14px;
-        padding: 8px 16px;
+    
+    #checklist li {
+        font-size: 14px; /* 모바일에서 글씨 크기 줄이기 */
     }
 }
