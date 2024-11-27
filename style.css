@@ -1,0 +1,186 @@
+/* 전체 공통 스타일 */
+:root {
+    --primary-color: #4caf50; /* 자연을 연상시키는 초록색 */
+    --secondary-color: #f3f8fc; /* 밝은 하늘색 배경 */
+    --accent-color: #c8f7dc; /* 밝은 초록색 강조 */
+    --text-color: #333;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+/* 헤더 스타일 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 8px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+header .menu-icon {
+    font-size: 1.5em;
+    cursor: pointer;
+    display: none; /* 모바일에서만 보이도록 */
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    transition: opacity 0.3s;
+}
+
+nav a:hover {
+    opacity: 0.7;
+}
+
+/* 모바일 메뉴 */
+@media (max-width: 768px) {
+    nav {
+        display: none;
+        flex-direction: column;
+        background: var(--primary-color);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0px 4px 10px var(--shadow-color);
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    header .menu-icon {
+        display: block;
+    }
+}
+
+/* 메인 컨테이너 */
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 카드 스타일 */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px var(--shadow-color);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px var(--shadow-color);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card h3 {
+    margin: 0;
+    padding: 15px;
+    color: var(--primary-color);
+    font-size: 1.2em;
+}
+
+.card p {
+    padding: 0 15px 15px 15px;
+    color: var(--text-color);
+    font-size: 0.9em;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.card button {
+    margin: 15px;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.card button:hover {
+    background-color: var(--accent-color);
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--accent-color);
+}
+
+/* 푸터 */
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
