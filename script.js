@@ -78,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// 페이지 로드 시 체크박스 상태 복원
 	loadChecklistState();
-	
 
 
 	

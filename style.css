@@ -384,15 +384,6 @@ header {
     opacity: 1;
 }
 
-/* 기본적으로 모든 섹션을 숨기고 active 클래스가 있는 섹션만 보이게 설정 */
-.section {
-    display: none;
-}
-
-.section.active {
-    display: block;
-}
-
 
 /* 메인 화면을 꾸미기 위한 스타일 */
 #main-intro {
